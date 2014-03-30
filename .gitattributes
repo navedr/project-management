@@ -1,0 +1,4 @@
+# Put attributes here
+*.py text eol=lf
+*.feature text eol=lf
+*.txt text eol=lf
