@@ -53,3 +53,4 @@ django-staticfiles
 django-authority
 django-forms-builder==0.9
 django-sql-explorer==0.2
+django-adminfilters==0.2

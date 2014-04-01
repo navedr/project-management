@@ -12,7 +12,7 @@ from django import forms
 from django.forms import ModelForm
 from adminsortable.admin import SortableAdmin
 import os.path
-
+from django_select2 import widgets as select2widgets
 
 class TaskInlineForm(ModelForm):
     class Meta:
@@ -86,7 +86,9 @@ class StoryForm(ModelForm):
     class Meta:
         widgets = {
             'description': RedactorWidget(editor_options={'lang': 'en'}),
-            'notes': RedactorWidget(editor_options={'lang': 'en'})
+            'notes': RedactorWidget(editor_options={'lang': 'en'}),
+            'state': select2widgets.Select2Widget(),
+            'iteration': select2widgets.Select2Widget()
         }
 
 class StoryAdmin(reversion.VersionAdmin):
