@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'pages',
     'forms_builder.forms',
     'explorer',
+    'djangular',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
