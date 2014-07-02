@@ -84,8 +84,8 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -121,10 +121,14 @@ TEMPLATE_DIRS = (
     map_path('templates')
 )
 
+GRAPPELLI_ADMIN_TITLE = 'Project Manager'
+
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Project Manager',
+    'ADMIN_NAME': GRAPPELLI_ADMIN_TITLE,
 
 }
+
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -137,6 +141,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'south',
     'suit',
+    # 'grappelli',
     'teams',
     'releases',
     'stories',
@@ -144,11 +149,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'suit_redactor',
     'suit_ckeditor',
-    'lettuce.django',
     'reversion',
     'django_select2',
     'mptt',
-    'pages',
     'forms_builder.forms',
     'explorer',
     'djangular',

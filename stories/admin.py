@@ -31,10 +31,11 @@ class TaskInline(admin.TabularInline):
             return None
     model = Task
     extra = 0
-    fields = ['edit_link', 'name', 'owner', 'state', 'estimated_hours', 'todo_hours', 'actual_hours']
+    fields = ['edit_link', 'name', 'owner', 'state', 'estimated_hours', 'todo_hours', 'actual_hours', 'position']
     readonly_fields = ('edit_link',)
     suit_classes = 'suit-tab suit-tab-tasks'
     form = TaskInlineForm
+    sortable_field_name = 'position'
 
 
 class TestCaseInline(admin.TabularInline):
