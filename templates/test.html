@@ -1,0 +1,50 @@
+{% load url from future %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="http://malsup.github.com/min/jquery.form.min.js">
+    </script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var options = {
+                success: function(data) {
+                    $("#test-form").dialog('close');
+                    alert(data);
+                },
+                error: function(data){
+                    $("#test-form").html(data.responseText);
+                }
+            };
+            $("#show-form").click(function(e){
+                $.ajax({
+                    url: '{% url 'contact_form' %}?name=Naved',
+                    cache: false,
+                    global: false,
+                    success: function(data){
+                        $("#test-form").html(data).dialog({
+                            width: 500,
+                            title: 'Test Form'
+                        }).ajaxForm(options);
+                    },
+                    async: true
+                });
+                return false;
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <a href="#" id="show-form">Show Form</a>
+    <div id="form-dialog">
+        <form id="test-form" method="post" action="{% url 'contact_form' %}">
+
+        </form>
+    </div>
+</body>
+</html>
