@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^select2/', include('django_select2.urls')),
     url(r'^forms/', include(forms_builder.forms.urls)),
     url(r'^explorer/', include('explorer.urls')),
+    url(r'^stories/', include('stories.urls')),
 )
 
 import settings

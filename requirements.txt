@@ -10,7 +10,6 @@ Werkzeug==0.8.3
 argparse==1.2.1
 coverage==3.6
 cssselect==0.8
-django-admin-bootstrapped==1.6.4
 django-admin-sortable==1.6.5
 django-adminfilters==0.2
 django-angular==0.7.0
@@ -67,3 +66,5 @@ zope.event==4.0.2
 zope.interface==4.1.0
 zope.schema==4.3.2
 zope.testbrowser==4.0.2
+bootstrap_admin==0.3.0
+django-admin-bootstrapped==2.0.4
