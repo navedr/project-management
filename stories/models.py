@@ -1,6 +1,7 @@
 from django.db import models
 from pm.models import TimeStampedModel
 from django.contrib.auth.models import User
+from multi_email_field.fields import MultiEmailField
 from adminsortable.models import Sortable
 
 STATE_CHOICES = (('Defined', 'Defined'),
@@ -61,7 +62,9 @@ class Story(TimeStampedModel):
     notes = models.TextField(null=True, blank=True)
     completion_date = models.DateField(null=True, blank=True)
     order = models.PositiveIntegerField(default=1)
-
+    emails = MultiEmailField(null=True)
+    email = models.CharField(max_length=1024, null=True)
+    
     def __unicode__(self):
 		return self.name
 

@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'forms_builder.forms',
     'explorer',
     'djangular',
+    'multi_email_field',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

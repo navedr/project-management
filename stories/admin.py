@@ -109,7 +109,7 @@ class StoryAdmin(reversion.VersionAdmin):
             'fields': ('name', 'tags', 'description', 'iteration',
                        ('owner', 'state',), ('project',
                        'release',), ('points', 'actual_hours',),
-                       ('estimated_hours', 'todo_hours'), 'notes')
+                       ('estimated_hours', 'todo_hours'), 'email', 'notes')
         }),
     )
     readonly_fields = ('actual_hours', 'estimated_hours', 'todo_hours',)

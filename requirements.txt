@@ -68,3 +68,4 @@ zope.schema==4.3.2
 zope.testbrowser==4.0.2
 bootstrap_admin==0.3.0
 django-admin-bootstrapped==2.0.4
+django-multi-email-field==0.3.1
