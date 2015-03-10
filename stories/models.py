@@ -64,7 +64,7 @@ class Story(TimeStampedModel):
     order = models.PositiveIntegerField(default=1)
     emails = MultiEmailField(null=True)
     email = models.CharField(max_length=1024, null=True)
-    
+
     def __unicode__(self):
 		return self.name
 
