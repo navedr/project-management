@@ -1,6 +1,10 @@
 from django.conf.urls import patterns, include, url
 import forms_builder.forms.urls
+from django.contrib.admin import site
+import adminactions.actions as actions
 
+# register all adminactions
+actions.add_to_site(site)
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -20,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^forms/', include(forms_builder.forms.urls)),
     url(r'^explorer/', include('explorer.urls')),
     url(r'^stories/', include('stories.urls')),
+    (r'^adminactions/', include('adminactions.urls')),
 )
 
 import settings

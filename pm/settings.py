@@ -131,6 +131,7 @@ SUIT_CONFIG = {
 
 
 INSTALLED_APPS = (
+    'adminactions',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
