@@ -1,56 +1,57 @@
 from django.db import models
 from pm.models import TimeStampedModel
 from django.contrib.auth.models import User
-from multi_email_field.fields import MultiEmailField
 from adminsortable.models import Sortable
 
 STATE_CHOICES = (('Defined', 'Defined'),
-                       ('In-Progress', 'In-Progress'),
-                       ('Completed', 'Completed'),
-                        ('Accepted', 'Accepted'),
-                       ('User Accepted', 'User Accepted'),)
+                 ('In-Progress', 'In-Progress'),
+                 ('Completed', 'Completed'),
+                 ('Accepted', 'Accepted'),
+                 ('User Accepted', 'User Accepted'),)
 TESTCASE_TYPE_CHOICES = (('Acceptance', 'Acceptance'),
-                       ('Functional', 'Functional'),
-                       ('Performance', 'Performance'),
-                        ('Regression', 'Regression'),
-                       ('Usability', 'Usability'),
-                        ('User Interface', 'User Interface'),)
+                         ('Functional', 'Functional'),
+                         ('Performance', 'Performance'),
+                         ('Regression', 'Regression'),
+                         ('Usability', 'Usability'),
+                         ('User Interface', 'User Interface'),)
 TESTCASE_METHOD_CHOICES = (('Manual', 'Manual'),
-                       ('Automated', 'Automated'),)
+                           ('Automated', 'Automated'),)
 TESTCASE_PRIORITY_CHOICES = (('Useful', 'Useful'),
-                       ('Important', 'Important'),
-                        ('Critical', 'Critical'),)
+                             ('Important', 'Important'),
+                             ('Critical', 'Critical'),)
 TESTCASE_RISK_CHOICES = (('Low', 'Low'),
-                       ('Medium', 'Medium'),
-                        ('High', 'High'),)
+                         ('Medium', 'Medium'),
+                         ('High', 'High'),)
 DEFECT_STATE_CHOICES = (('Submitted', 'Submitted'),
-                       ('Open', 'Open'),
-                       ('Fixed', 'Fixed'),
+                        ('Open', 'Open'),
+                        ('Fixed', 'Fixed'),
                         ('Closed', 'Closed'),)
 DEFECT_ENV_CHOICES = (('Development', 'Development'),
-                       ('Test', 'Test'),
-                       ('Staging', 'Staging'),
-                        ('Production', 'Production'),)
+                      ('Test', 'Test'),
+                      ('Staging', 'Staging'),
+                      ('Production', 'Production'),)
 DEFECT_PRIORITY_CHOICES = (('Resolve Immediately', 'Resolve Immediately'),
-                       ('High Attention', 'High Attention'),
-                       ('Normal', 'Normal'),
-                        ('Low', 'Low'),)
+                           ('High Attention', 'High Attention'),
+                           ('Normal', 'Normal'),
+                           ('Low', 'Low'),)
 DEFECT_SEVERITY_CHOICES = (('Crash/Data Loss', 'Crash/Data Loss'),
-                       ('Major Problem', 'Major Problem'),
-                       ('Minor Problem', 'Minor Problem'),
-                        ('Cosmetic', 'Cosmetic'),)
+                           ('Major Problem', 'Major Problem'),
+                           ('Minor Problem', 'Minor Problem'),
+                           ('Cosmetic', 'Cosmetic'),)
 DEFECT_RESOLUTION_CHOICES = (('Architecture', 'Architecture'),
-                       ('Code Change', 'Code Change'),
-                       ('Configuration Change', 'Configuration Change'),
-                        ('Database Change', 'Database Change'),
-                        ('Duplicate', 'Duplicate'),
-                       ('Need More Information', 'Need More Information'),
-                        ('Not a Defect', 'Not a Defect'),
-                        ('Software Limitation', 'Software Limitation'),
-                       ('User Interface', 'User Interface'),
-                        ('Converted', 'Converted'),)
+                             ('Code Change', 'Code Change'),
+                             ('Configuration Change', 'Configuration Change'),
+                             ('Database Change', 'Database Change'),
+                             ('Duplicate', 'Duplicate'),
+                             ('Need More Information', 'Need More Information'),
+                             ('Not a Defect', 'Not a Defect'),
+                             ('Software Limitation', 'Software Limitation'),
+                             ('User Interface', 'User Interface'),
+                             ('Converted', 'Converted'),)
+
+
 class Story(TimeStampedModel):
-    iteration  = models.ForeignKey("releases.Iteration", null=True, blank=True)
+    iteration = models.ForeignKey("releases.Iteration", null=True, blank=True)
     name = models.CharField(max_length=255, null=False, blank=False)
     tags = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -62,11 +63,11 @@ class Story(TimeStampedModel):
     notes = models.TextField(null=True, blank=True)
     completion_date = models.DateField(null=True, blank=True)
     order = models.PositiveIntegerField(default=1)
-    emails = MultiEmailField(null=True)
+    emails = models.EmailField(null=True)
     email = models.CharField(max_length=1024, null=True)
 
     def __unicode__(self):
-		return self.name
+        return self.name
 
     class Meta:
         verbose_name_plural = 'Stories'
@@ -75,6 +76,7 @@ class Story(TimeStampedModel):
         for index, story in enumerate(orm.Story.objects.all()):
             story.order = index + 1
             story.save()
+
 
 class Task(TimeStampedModel):
     story = models.ForeignKey(Story)
@@ -143,24 +145,26 @@ class StoryAttachment(TimeStampedModel):
     file = models.FileField(upload_to='attachments/stories/%Y/%m/%d')
 
     class Meta:
-		verbose_name = "Attachment"
-		verbose_name_plural = 'Attachments'
+        verbose_name = "Attachment"
+        verbose_name_plural = 'Attachments'
+
 
 class TaskAttachment(TimeStampedModel):
     task = models.ForeignKey(Task)
     file = models.FileField(upload_to='attachments/tasks/%Y/%m/%d')
 
     class Meta:
-		verbose_name = "Attachment"
-		verbose_name_plural = 'Attachments'
+        verbose_name = "Attachment"
+        verbose_name_plural = 'Attachments'
+
 
 class TestCaseAttachment(TimeStampedModel):
     testcase = models.ForeignKey(TestCase)
     file = models.FileField(upload_to='attachments/testcases/%Y/%m/%d')
 
     class Meta:
-		verbose_name = "Attachment"
-		verbose_name_plural = 'Attachments'
+        verbose_name = "Attachment"
+        verbose_name_plural = 'Attachments'
 
 
 class DefectAttachment(TimeStampedModel):
@@ -168,5 +172,5 @@ class DefectAttachment(TimeStampedModel):
     file = models.FileField(upload_to='attachments/defects/%Y/%m/%d')
 
     class Meta:
-		verbose_name = "Attachment"
-		verbose_name_plural = 'Attachments'
+        verbose_name = "Attachment"
+        verbose_name_plural = 'Attachments'

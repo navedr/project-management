@@ -1,13 +1,12 @@
 # Django settings for pm project.
 import os
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
 
 def map_path(directory_name):
-    return "/".join(os.path.dirname(__file__).split('/')[:-1]+[directory_name])
+    return "/".join(os.path.dirname(__file__).split('/')[:-1] + [directory_name])
 
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -17,13 +16,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'pm',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'pm',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'naved',
         'PASSWORD': 'naved',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',  # Set to empty string for default.
     }
 }
 
@@ -86,18 +85,11 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '(sm4s)$q!$rw(o%m1$dc_hv5e40w7h1gsam@e^7-&@oj*k&&db'
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -114,22 +106,6 @@ ROOT_URLCONF = 'pm.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'pm.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    map_path('templates')
-)
-
-GRAPPELLI_ADMIN_TITLE = 'Project Manager'
-
-SUIT_CONFIG = {
-    'ADMIN_NAME': GRAPPELLI_ADMIN_TITLE,
-
-}
-
-
-
 INSTALLED_APPS = (
     'adminactions',
     'django.contrib.auth',
@@ -139,35 +115,32 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    # Uncomment the next line to enable the admin:
-    'south',
-    'suit',
-    # 'grappelli',
-    # 'bootstrap_admin',
-    # 'django_admin_bootstrapped.bootstrap3',
-    # 'django_admin_bootstrapped',
+    'jet.dashboard',
+    'jet',
     'teams',
     'releases',
     'stories',
     'adminsortable',
     'django.contrib.admin',
-    'suit_redactor',
-    'suit_ckeditor',
     'reversion',
     'django_select2',
-    'mptt',
     'forms_builder.forms',
     'explorer',
-    'djangular',
-    'multi_email_field',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-    'django.core.context_processors.static'
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [map_path('templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth'
+            ],
+        },
+    },
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -199,9 +172,6 @@ LOGGING = {
 }
 
 PAGE_DEFAULT_TEMPLATE = 'pages/index.html'
-# Default language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
 
 # This is defined here as a do-nothing function because we can't import
 # django.utils.translation -- that module depends on the settings.
@@ -221,6 +191,6 @@ languages = list(PAGE_LANGUAGES)
 LANGUAGES = languages
 
 try:
-    from local_settings import *
+    from pm.local_settings import *
 except:
     pass
