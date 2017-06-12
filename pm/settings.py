@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'adminsortable',
     'django.contrib.admin',
     'reversion',
-    'django_select2',
     'forms_builder.forms',
     'explorer',
 )
@@ -183,6 +182,18 @@ PAGE_LANGUAGES = (
     ('fr-ch', gettext_noop('Swiss french')),
     ('en-us', gettext_noop('US English')),
 )
+
+JET_SIDE_MENU_CUSTOM_APPS = [
+    ('stories', [
+        'Story',
+    ]),
+    ('releases', [
+        '__all__',
+    ]),
+    ('teams', [
+        '__all__',
+    ]),
+]
 
 # copy PAGE_LANGUAGES
 languages = list(PAGE_LANGUAGES)
