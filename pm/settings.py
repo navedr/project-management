@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'adminsortable',
     'django.contrib.admin',
     'reversion',
-    'forms_builder.forms',
     'explorer',
 )
 
